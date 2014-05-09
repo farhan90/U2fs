@@ -1,0 +1,48 @@
+The main code for the u2fs file system is in the fs/wrapfs directory.
+
+The directory includes a Makefile and all the other files required to create the module
+for the filesystem
+
+
+To mount the file systems there is a script inside the fs/wrapfs directory called
+install_modules.sh. This module installs the module and mounts the u2fs filesystem
+
+
+The u2fs file system takes 2 options the ldir for the left directory and the rdir for the
+right directory. So to mount you have to provide the path for both left and right directories
+seperated by a comma. There should be any spaces between the comma.
+Also the left path should be written first and then the right.
+
+eg: mount -f u2fs -o ldir=/path/left_dir,rdir=/path/right_dir none mount point
+
+
+The mount point should be a directory which already exists.
+
+
+Design Issues
+-------------
+The u2fs file system is built by extending the current functionality of wrapfs. The u2fs filesystem
+combines 2 different file systems with the left branch or file system being read write and the right 
+branch being read only.
+
+So for every data structure in wrapfs I have added an extra variable that will hold the respective 
+information about the left and right branch. The reason for doing it was to keep it simple and 
+make sure the functionalities of the right branch are supported.
+
+For whiteouts I create a file in the left branch starting with the prefix ".wh.parent_name.file_name"
+I include the parent name to differentiate between files with the same name in 2 different directories
+in the right branch.
+
+ 
+I have added my own method for getting inodes and interposing with the u2fs file system
+
+I have modified the lookup to make sure both the left and the right path are found.
+
+I have been cautious about avoiding memory leaks so memory leaks are avoided.
+
+
+
+
+
+
+
