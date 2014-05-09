@@ -4,6 +4,9 @@ seperate file system and display to the user as a single one.
 So the file system takes a left branch and right branch where the right branch
 is considered to be read only.
 
+The project uses the wrapfs file system as a template and modifies its code
+to create a stackable file system U2fs
+
 
 The directory includes a Makefile and all the other files required to create the module
 for the filesystem
