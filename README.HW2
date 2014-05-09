@@ -1,4 +1,9 @@
-The main code for the u2fs file system is in the fs/wrapfs directory.
+
+This is an academic project to create a simple file system that will union 2 
+seperate file system and display to the user as a single one.
+So the file system takes a left branch and right branch where the right branch
+is considered to be read only.
+
 
 The directory includes a Makefile and all the other files required to create the module
 for the filesystem
